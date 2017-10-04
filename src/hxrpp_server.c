@@ -32,7 +32,12 @@
 #include "utils/app_config.h"
 
 struct hxrpp_server_cfg {
-    bool fake;
+
+    size_t max_packets;
+    uint16_t packet_size;
+    hxrpp_usec_t train_gap;
+    hxrpp_usec_t period;
+
     struct app_config *cfg;
     char cfg_mem[0];
 };
@@ -153,15 +158,11 @@ void wait_client_and_send( struct hxrpp_server_cfg *app ) {
     //         given length and given delay
     //         during the given time
 
-    const int packet_size = 1432;
-    hxrpp_usec_t pair_gap = { .u = 5000 };
-    hxrpp_usec_t period   = { .u = 40000000 };
-
     hxrpp_send_pkt_pairs( fds[ret].fd
                         , &orig
-                        , packet_size
-                        , &pair_gap
-                        , &period
+                        , app->packet_size
+                        , &app->train_gap
+                        , &app->period
                         , 0
                         , 0 );
     close(sock);
@@ -218,7 +219,6 @@ void receive_packets_from_remote( struct hxrpp_server_cfg *app, hexsockaddr_t *r
 
     sendmsg(sock, &hdr, 0);
 
-
     // TODO: listen/poll UDP socket
     struct pollfd fds[2];
     memset(fds, 0, sizeof(fds));
@@ -226,10 +226,12 @@ void receive_packets_from_remote( struct hxrpp_server_cfg *app, hexsockaddr_t *r
     fds[1].events = POLLIN;
 
 
+    fprintf(stdout, "# gap: %ld\n", app->train_gap.u);
+
     for(;;) {
 
         const int train = 2;
-        const int BUFSIZE = 1024;
+        const int BUFSIZE = 2048;
         const int TIMESTAMP_LEN = 40;
 
         struct mmsghdr msgs[train];
@@ -272,53 +274,13 @@ void receive_packets_from_remote( struct hxrpp_server_cfg *app, hexsockaddr_t *r
                 type  = cm->cmsg_type;
                 if (SOL_SOCKET == level && SO_TIMESTAMPNS == type) {
                     ts = (struct timespec *) CMSG_DATA(cm);
-                    printf("SW TIMESTAMP[%d] %ld.%09ld\n", i, (long)ts[0].tv_sec, (long)ts[0].tv_nsec);
+                    fprintf(stdout, "SW TIMESTAMP[%d] %ld.%09ld\n", i, (long)ts[0].tv_sec, (long)ts[0].tv_nsec);
 /*                    printf("TIMESTAMP[%d] %ld\n", i, timespec_to_useconds(ts));*/
                 }
             }
         }
 
-/*            int level, type;*/
-/*            struct cmsghdr *cm;*/
-/*            struct timespec *ts = NULL;*/
-
-
-/*            fprintf(stderr, "control{2}(%ld) \n", msgs[i].msg_hdr.msg_controllen); // = tss[i];*/
-
-/*            fprintf(stderr, "wut %d\n",  msgs[i].msg_len );*/
-
-/*            for (cm = CMSG_FIRSTHDR(&msgs[i].msg_hdr); cm != NULL; cm = CMSG_NXTHDR(&msgs[i].msg_hdr, cm))*/
-/*            {*/
-/*                fprintf(stderr, "WTF?\n");*/
-/*                level = cm->cmsg_level;*/
-/*                type  = cm->cmsg_type;*/
-/*                if (SOL_SOCKET == level && SO_TIMESTAMP == type) {*/
-/*                    fprintf(stderr, "gotcha!\n");*/
-/*                    ts = (struct timespec *) CMSG_DATA(cm);*/
-/*                    printf("SW TIMESTAMP %ld.%09ld\n", (long)ts[0].tv_sec, (long)ts[0].tv_nsec);*/
-/*                }*/
-/*            }*/
-
-
-/*            struct msghdr	*msgp = &msgps;*/
-
-/*            struct cmsghdr	*cmsg;*/
-/*            for (	cmsg = CMSG_FIRSTHDR( msgp );*/
-/*                cmsg != NULL;*/
-/*                cmsg = CMSG_NXTHDR( msgp, cmsg ) )*/
-/*                {*/
-/*                if (( cmsg->cmsg_level == SOL_SOCKET )*/
-/*                    &&( cmsg->cmsg_type == SO_TIMESTAMP ))*/
-/*                        memcpy( &tvrecv, CMSG_DATA( cmsg ), tlen );*/
-/*                }			*/
-
-/*        }*/
-
-
     }
-/*    }*/
-
-/*    usleep( 10*1000000 );*/
 
     close(sock);
 }
@@ -333,6 +295,13 @@ int main(int argc, char **argv)
     if( !app_config_load(app->cfg, argc, argv) ) {
         exit(-1);
     }
+
+    app->max_packets  = 4000;
+    app->packet_size  = 1432;
+    app->period.u     = 40000000;
+    app->train_gap.u  = app->period.u / (app->max_packets / 2);
+
+    // TODO: setup signals
 
     long serv_port = 0;
     app_config_opt_get_int(app->cfg, SERVE_ON_PORT, &serv_port);
@@ -371,11 +340,6 @@ int main(int argc, char **argv)
     fprintf(stderr, "no idea\n");
     exit(-1);
 
-    // TODO: setup signals
-
-    for( ;;) {
-
-    }
 
     return 0;
 }
