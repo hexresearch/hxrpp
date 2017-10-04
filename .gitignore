@@ -1,0 +1,8 @@
+.*.swp
+.built*
+.configured_*
+.prepared_*
+autogen
+ipkg-*
+.dep_files
+/result
