@@ -78,7 +78,6 @@ int main(int argc, char **argv)
         exit(-1);
     }
 
-
     // TODO: bind to UDP socket
     // TODO: listen UDP socket
     // TODO: if got UDP message
