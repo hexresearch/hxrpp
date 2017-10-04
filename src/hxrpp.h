@@ -4,17 +4,19 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <time.h>
 
 #include "hexsockaddr/hexsockaddr.h"
 
 typedef struct hxrpp_usec {
-    useconds_t u;
+    uint64_t u;
 } hxrpp_usec_t;
 
 typedef union hxrpp_session_init_msg {
     char raw[256];
 } hxrpp_session_init_msg_t;
 
+uint64_t timespec_to_useconds( struct timespec *ts );
 
 size_t hxrpp_send_pkt_pairs( int socket
                            , hexsockaddr_t *dst

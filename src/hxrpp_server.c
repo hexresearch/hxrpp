@@ -154,8 +154,8 @@ void wait_client_and_send( struct hxrpp_server_cfg *app ) {
     //         during the given time
 
     const int packet_size = 1024;
-    hxrpp_usec_t pair_gap = { .u = 100000 };
-    hxrpp_usec_t period   = { .u = 5 * 1000000 };
+    hxrpp_usec_t pair_gap = { .u = 10000 };
+    hxrpp_usec_t period   = { .u = 5000000 };
 
     hxrpp_send_pkt_pairs( fds[ret].fd
                         , &orig
@@ -179,6 +179,11 @@ void receive_packets_from_remote( struct hxrpp_server_cfg *app, hexsockaddr_t *r
         exit(-1);
     }
 
+    int val = 1;
+    int err = setsockopt(sock, SOL_SOCKET, SO_TIMESTAMPNS, &val, sizeof(val));
+
+    fprintf(stderr, "err %d %08x\n", err, val);
+
     socklen_t ssize = hexsockaddr_ipv4(remote) ? sizeof(struct sockaddr_in)
                                                : sizeof(struct sockaddr_in6);
 
@@ -189,6 +194,10 @@ void receive_packets_from_remote( struct hxrpp_server_cfg *app, hexsockaddr_t *r
                      , hexsockaddr_fmt(tmp, sizeof(tmp), true, remote));
         exit(-1);
     }
+
+/*    if( err < 0 ) {*/
+        fprintf(stderr, "wtf %d\n", err);
+/*    }*/
 
     hxrpp_session_init_msg_t init = { 0 };
 
@@ -221,21 +230,25 @@ void receive_packets_from_remote( struct hxrpp_server_cfg *app, hexsockaddr_t *r
 
         const int train = 2;
         const int BUFSIZE = 1024;
+        const int TIMESTAMP_LEN = 40;
 
         struct mmsghdr msgs[train];
         struct iovec iovecs[train];
         char bufs[train][BUFSIZE];
+        char tss[train][TIMESTAMP_LEN];
 
         memset(msgs, 0, sizeof(msgs));
 
         for(int i = 0; i < train; i++) {
-            iovecs[i].iov_base         = bufs[i];
+            iovecs[i].iov_base         = &bufs[i];
             iovecs[i].iov_len          = BUFSIZE;
             msgs[i].msg_hdr.msg_iov    = &iovecs[i];
             msgs[i].msg_hdr.msg_iovlen = 1;
+            msgs[i].msg_hdr.msg_control = &tss[i];
+            msgs[i].msg_hdr.msg_controllen = TIMESTAMP_LEN;
         }
 
-        int ret = poll(fds, sizeof(fds)/sizeof(fds[0]), 10000);
+        int ret = poll(fds, sizeof(fds)/sizeof(fds[0]), 5000);
 
         int retval = recvmmsg(sock, msgs, train, 0, &timeout);
 
@@ -248,7 +261,59 @@ void receive_packets_from_remote( struct hxrpp_server_cfg *app, hexsockaddr_t *r
             exit(-1);
         }
 
-        fprintf(stderr, "retval %d\n", retval);
+        for(int i = 0; i < retval; i++ ) {
+
+            int level, type;
+            struct cmsghdr *cm;
+            struct timespec *ts;
+
+            for (cm = CMSG_FIRSTHDR(&msgs[i].msg_hdr); cm != NULL; cm = CMSG_NXTHDR(&msgs[i].msg_hdr, cm)) {
+                level = cm->cmsg_level;
+                type  = cm->cmsg_type;
+                if (SOL_SOCKET == level && SO_TIMESTAMPNS == type) {
+                    ts = (struct timespec *) CMSG_DATA(cm);
+                    printf("SW TIMESTAMP[%d] %ld.%09ld\n", i, (long)ts[0].tv_sec, (long)ts[0].tv_nsec);
+/*                    printf("TIMESTAMP[%d] %ld\n", i, timespec_to_useconds(ts));*/
+                }
+            }
+        }
+
+/*            int level, type;*/
+/*            struct cmsghdr *cm;*/
+/*            struct timespec *ts = NULL;*/
+
+
+/*            fprintf(stderr, "control{2}(%ld) \n", msgs[i].msg_hdr.msg_controllen); // = tss[i];*/
+
+/*            fprintf(stderr, "wut %d\n",  msgs[i].msg_len );*/
+
+/*            for (cm = CMSG_FIRSTHDR(&msgs[i].msg_hdr); cm != NULL; cm = CMSG_NXTHDR(&msgs[i].msg_hdr, cm))*/
+/*            {*/
+/*                fprintf(stderr, "WTF?\n");*/
+/*                level = cm->cmsg_level;*/
+/*                type  = cm->cmsg_type;*/
+/*                if (SOL_SOCKET == level && SO_TIMESTAMP == type) {*/
+/*                    fprintf(stderr, "gotcha!\n");*/
+/*                    ts = (struct timespec *) CMSG_DATA(cm);*/
+/*                    printf("SW TIMESTAMP %ld.%09ld\n", (long)ts[0].tv_sec, (long)ts[0].tv_nsec);*/
+/*                }*/
+/*            }*/
+
+
+/*            struct msghdr	*msgp = &msgps;*/
+
+/*            struct cmsghdr	*cmsg;*/
+/*            for (	cmsg = CMSG_FIRSTHDR( msgp );*/
+/*                cmsg != NULL;*/
+/*                cmsg = CMSG_NXTHDR( msgp, cmsg ) )*/
+/*                {*/
+/*                if (( cmsg->cmsg_level == SOL_SOCKET )*/
+/*                    &&( cmsg->cmsg_type == SO_TIMESTAMP ))*/
+/*                        memcpy( &tvrecv, CMSG_DATA( cmsg ), tlen );*/
+/*                }			*/
+
+/*        }*/
+
 
     }
 /*    }*/

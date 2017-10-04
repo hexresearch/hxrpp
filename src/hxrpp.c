@@ -11,12 +11,16 @@
 
 #include "hxrpp.h"
 
+uint64_t timespec_to_useconds( struct timespec *ts ) {
+    uint64_t u1 = ((useconds_t)ts->tv_sec) * 1000000;
+    uint64_t u2 = ((useconds_t)ts->tv_nsec) / 1000;
+    return u1 + u2;
+}
+
 hxrpp_usec_t gettimeofday_usec(void) {
     struct timespec ts;
     clock_gettime(CLOCK_REALTIME_COARSE, &ts);
-    useconds_t u1 = ((useconds_t)ts.tv_sec) * 1000000;
-    useconds_t u2 = ((useconds_t)ts.tv_nsec) / 1000;
-    return (hxrpp_usec_t){ .u = u1 + u2 };
+    return (hxrpp_usec_t){ .u = timespec_to_useconds(&ts) };
 }
 
 size_t hxrpp_send_pkt_pairs( int sock
@@ -77,7 +81,11 @@ size_t hxrpp_send_pkt_pairs( int sock
             break;
         }
         sent += sn;
+
+        // FIXME: this WTF prevents multi-client
+        //        but it's normal case one process per one client
         usleep(gap->u);
+
         now = gettimeofday_usec();
         fprintf(stderr, "    %3d     %10ld\r", sn, sent);
     }
