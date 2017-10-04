@@ -153,9 +153,9 @@ void wait_client_and_send( struct hxrpp_server_cfg *app ) {
     //         given length and given delay
     //         during the given time
 
-    const int packet_size = 1024;
-    hxrpp_usec_t pair_gap = { .u = 10000 };
-    hxrpp_usec_t period   = { .u = 5000000 };
+    const int packet_size = 1432;
+    hxrpp_usec_t pair_gap = { .u = 5000 };
+    hxrpp_usec_t period   = { .u = 40000000 };
 
     hxrpp_send_pkt_pairs( fds[ret].fd
                         , &orig
