@@ -31,6 +31,8 @@ $(OPTS_GEN):
 	@echo Generate $@
 	@egrep -sho '^\s*CFG_OPTION\(.*\)' `ls -1 *.h | grep -v $(OPTS_GEN)` >> $@
 
+hxrpp_server.c: $(OPTS_GEN)
+
 all: $(ALLEXECUTABLES)
 
 show:
