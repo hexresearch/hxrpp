@@ -1,0 +1,53 @@
+item(Z) sum: 1
+item(Y) sum: 2
+item(X) sum: 3
+item(W) sum: 4
+item(V) sum: 5
+item(U) sum: 6
+item(T) sum: 7
+item(S) sum: 8
+item(R) sum: 9
+item(Q) sum: 10
+item(P) sum: 11
+item(O) sum: 12
+item(N) sum: 13
+item(M) sum: 14
+item(L) sum: 15
+item(K) sum: 16
+item(J) sum: 17
+item(I) sum: 18
+item(H) sum: 19
+item(G) sum: 20
+item(F) sum: 21
+item(E) sum: 22
+item(D) sum: 23
+item(C) sum: 24
+item(B) sum: 25
+item(A) sum: 26
+destroying (Z)
+destroying (Y)
+destroying (X)
+destroying (W)
+destroying (V)
+destroying (U)
+destroying (T)
+destroying (S)
+destroying (R)
+destroying (Q)
+destroying (P)
+destroying (O)
+destroying (N)
+destroying (M)
+destroying (L)
+destroying (K)
+destroying (J)
+destroying (I)
+destroying (H)
+destroying (G)
+filtered
+item(F) sum: 27
+item(E) sum: 28
+item(D) sum: 29
+item(C) sum: 30
+item(B) sum: 31
+item(A) sum: 32

@@ -1,0 +1,10 @@
+found 'BA' in 'ABA' at 1
+found 'Ba' in 'aba' at 1
+not found 'AZAZA' in 'ABABABA' at 7
+found 'AzAzA' in 'ABABAazazaAJHSJHAS AJSH ' at 5
+not found 'KitA' in '' at 0
+found '' in '' at 0
+found 'googlevideo' in 'a1.b2.c4-fff.googlevideo.com' at 13
+found 'fcdn' in 'a1.b2.c4-fff.fcdn.akamai.cn' at 13
+found 'a1' in 'a1.b2.c4-fff.fcdn.akamai.cn' at 0
+found '.cn' in 'a1.b2.c4-fff.fcdn.akamai.cn' at 24

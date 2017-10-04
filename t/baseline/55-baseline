@@ -1,0 +1,120 @@
+
+hash#0
+capacity:         4096
+used:             2861
+collisions (avg): 0
+max. row:         7
+
+hash#1
+capacity:         4096
+used:             2903
+collisions (avg): 0
+max. row:         7
+
+hash#2
+capacity:         4096
+used:             2917
+collisions (avg): 0
+max. row:         6
+
+hash#3
+capacity:         4096
+used:             2867
+collisions (avg): 0
+max. row:         6
+
+hash#4
+capacity:         4096
+used:             2904
+collisions (avg): 0
+max. row:         7
+
+hash#5
+capacity:         4096
+used:             2901
+collisions (avg): 0
+max. row:         7
+
+hash#6
+capacity:         4096
+used:             2872
+collisions (avg): 0
+max. row:         7
+
+hash#7
+capacity:         4096
+used:             2921
+collisions (avg): 0
+max. row:         7
+
+hash#8
+capacity:         4096
+used:             2885
+collisions (avg): 0
+max. row:         7
+
+hash#9
+capacity:         4096
+used:             2900
+collisions (avg): 0
+max. row:         7
+
+hash#10
+capacity:         4096
+used:             2897
+collisions (avg): 0
+max. row:         7
+
+hash#11
+capacity:         4096
+used:             2870
+collisions (avg): 0
+max. row:         7
+
+hash#12
+capacity:         4096
+used:             2907
+collisions (avg): 0
+max. row:         6
+
+hash#13
+capacity:         4096
+used:             2912
+collisions (avg): 0
+max. row:         7
+
+hash#14
+capacity:         4096
+used:             2901
+collisions (avg): 0
+max. row:         7
+
+hash#15
+capacity:         4096
+used:             2878
+collisions (avg): 0
+max. row:         7
+
+hash#16
+capacity:         4096
+used:             2930
+collisions (avg): 0
+max. row:         7
+
+hash#17
+capacity:         4096
+used:             2916
+collisions (avg): 0
+max. row:         7
+
+hash#18
+capacity:         4096
+used:             2885
+collisions (avg): 0
+max. row:         7
+
+hash#19
+capacity:         4096
+used:             2908
+collisions (avg): 0
+max. row:         8

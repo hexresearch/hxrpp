@@ -1,0 +1,7 @@
+digraph G1 {
+"(nil,0)" -> "(50,1)";
+}
+
+digraph G2 {
+}
+

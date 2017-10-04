@@ -1,0 +1,22 @@
+capacity:         2048
+used:             1000
+collisions (avg): 0
+max. row:         1
+
+filtered
+capacity:         2048
+used:             0
+collisions (avg): 0
+max. row:         0
+
+shrinked
+capacity:         32
+used:             0
+collisions (avg): 0
+max. row:         0
+
+added 100
+capacity:         256
+used:             100
+collisions (avg): 0
+max. row:         1

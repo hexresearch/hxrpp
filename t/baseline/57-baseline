@@ -1,0 +1,38 @@
+hash allocated? yes
+
+added something? yes
+
+found all ? yes
+
+capacity:         32
+used:             32
+collisions (avg): 2
+max. row:         4
+
+filtered off
+
+capacity:         32
+used:             0
+collisions (avg): 0
+max. row:         0
+
+added: 100
+
+capacity:         32
+used:             32
+collisions (avg): 2
+max. row:         4
+
+filtered even
+
+capacity:         32
+used:             16
+collisions (avg): 2
+max. row:         4
+
+trying shrink -- should make no effect
+
+capacity:         32
+used:             16
+collisions (avg): 2
+max. row:         4

@@ -1,0 +1,40 @@
+.#1
+moc#2
+ur#5
+.xednay#6
+.elgoog#3
+.a#4
+
+
+LOOKUP .ur.ay
+found partial match : 1
+found partial match : 5
+FOUND FALSE: .ur.ay (ur,5)
+LOOKUP .moc.oob
+found partial match : 1
+found partial match : 2
+FOUND FALSE: .moc.oob (moc,2)
+LOOKUP .gro.fbo
+found partial match : 1
+FOUND FALSE: .gro.fbo (.,1)
+LOOKUP .moc.abcd
+found partial match : 1
+found partial match : 2
+FOUND FALSE: .moc.abcd (moc,2)
+LOOKUP .moc.elgoog.c
+found partial match : 1
+found partial match : 2
+found partial match : 3
+FOUND FALSE: .moc.elgoog.c (.elgoog,3)
+LOOKUP .moc.elgoog.a.d
+found partial match : 1
+found partial match : 2
+found partial match : 3
+found partial match : 4
+FOUND FALSE: .moc.elgoog.a.d (.a,4)
+LOOKUP .oof
+found partial match : 1
+FOUND FALSE: .oof (.,1)
+LOOKUP .fsf.gro
+found partial match : 1
+FOUND FALSE: .fsf.gro (.,1)

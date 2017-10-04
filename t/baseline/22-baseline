@@ -1,0 +1,80 @@
+item(Z) sum: 1
+item(Y) sum: 2
+item(X) sum: 3
+item(W) sum: 4
+item(V) sum: 5
+item(U) sum: 6
+item(T) sum: 7
+item(S) sum: 8
+item(R) sum: 9
+item(Q) sum: 10
+item(P) sum: 11
+item(O) sum: 12
+item(N) sum: 13
+item(M) sum: 14
+item(L) sum: 15
+item(K) sum: 16
+item(J) sum: 17
+item(I) sum: 18
+item(H) sum: 19
+item(G) sum: 20
+item(F) sum: 21
+item(E) sum: 22
+item(D) sum: 23
+item(C) sum: 24
+item(B) sum: 25
+item(A) sum: 26
+partitioned -- match
+item(M) sum: 27
+item(L) sum: 28
+item(K) sum: 29
+item(J) sum: 30
+item(I) sum: 31
+item(H) sum: 32
+item(G) sum: 33
+item(F) sum: 34
+item(E) sum: 35
+item(D) sum: 36
+item(C) sum: 37
+item(B) sum: 38
+item(A) sum: 39
+partitioned -- rest
+item(Z) sum: 40
+item(Y) sum: 41
+item(X) sum: 42
+item(W) sum: 43
+item(V) sum: 44
+item(U) sum: 45
+item(T) sum: 46
+item(S) sum: 47
+item(R) sum: 48
+item(Q) sum: 49
+item(P) sum: 50
+item(O) sum: 51
+item(N) sum: 52
+freeing (M)
+freeing (L)
+freeing (K)
+freeing (J)
+freeing (I)
+freeing (H)
+freeing (G)
+freeing (F)
+freeing (E)
+freeing (D)
+freeing (C)
+freeing (B)
+freeing (A)
+freeing (Z)
+freeing (Y)
+freeing (X)
+freeing (W)
+freeing (V)
+freeing (U)
+freeing (T)
+freeing (S)
+freeing (R)
+freeing (Q)
+freeing (P)
+freeing (O)
+freeing (N)
