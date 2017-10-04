@@ -1,0 +1,30 @@
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: nil
+  free: xxxx
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 7
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 7
+  head: nil
+  tail: xxxx
+  free: xxxx
+still here: 10
+drop
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: xxxx
+  free: xxxx

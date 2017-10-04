@@ -204,7 +204,7 @@ void rtrie_dfs(rtrie *t, void *cc, rtrie_cb cb)
 void rtrie_free(rtrie *t, void *cc, rtrie_cb cb)
 {
     if( t != NULL ) {
-        if( rtrie_emptyval(t->v) ) {
+        if( !rtrie_emptyval(t->v) ) {
             safecall(unit, cb, cc, t->ka, t->ke, t->v);
         }
 

@@ -167,3 +167,11 @@ void slist_partition_destructive( slist **xs
     *notmatch = new_l2;
 }
 
+void slist_reverse(slist **r) {
+    slist *hd = 0;
+    while( r && *r ) {
+        hd = slist_cons(slist_uncons(r), hd);
+    }
+    *r = hd;
+}
+

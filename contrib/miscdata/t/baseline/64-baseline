@@ -1,0 +1,295 @@
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: nil
+  free: xxxx
+added 0
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: nil
+  free: xxxx
+
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: nil
+  free: xxxx
+
+added 1
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 7
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+00
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: xxxx
+  free: xxxx
+
+added 2
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 6
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+00 01
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: xxxx
+  free: xxxx
+
+added 3
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 5
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+00 01 02
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: xxxx
+  free: xxxx
+
+added 4
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 4
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+00 01 02 03
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: xxxx
+  free: xxxx
+
+added 5
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 3
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+00 01 02 03 04
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: xxxx
+  free: xxxx
+
+added 6
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 2
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+00 01 02 03 04 05
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: xxxx
+  free: xxxx
+
+added 7
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 1
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+00 01 02 03 04 05 06
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: xxxx
+  free: xxxx
+
+added 8
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 0
+  head: xxxx
+  tail: xxxx
+  free: nil
+00 01 02 03 04 05 06
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 7
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+07
+added 9
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 0
+  head: xxxx
+  tail: xxxx
+  free: nil
+00 01 02 03 04 05 06
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 7
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+07 08
+added 10
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 0
+  head: xxxx
+  tail: xxxx
+  free: nil
+00 01 02 03 04 05 06
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 7
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+07 08 09
+added 11
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 0
+  head: xxxx
+  tail: xxxx
+  free: nil
+00 01 02 03 04 05 06
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 7
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+07 08 09 0a
+added 12
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 0
+  head: xxxx
+  tail: xxxx
+  free: nil
+00 01 02 03 04 05 06
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 7
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+07 08 09 0a 0b
+added 13
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 0
+  head: xxxx
+  tail: xxxx
+  free: nil
+00 01 02 03 04 05 06
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 7
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+07 08 09 0a 0b 0c
+added 14
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 0
+  head: xxxx
+  tail: xxxx
+  free: nil
+00 01 02 03 04 05 06
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 7
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+07 08 09 0a 0b 0c 0d
+added 15
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 0
+  head: xxxx
+  tail: xxxx
+  free: nil
+00 01 02 03 04 05 06
+after shrink
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 7
+  head: xxxx
+  tail: xxxx
+  free: xxxx
+07 08 09 0a 0b 0c 0d 0e
