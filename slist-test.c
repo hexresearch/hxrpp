@@ -186,4 +186,63 @@ void test_slist_char_array_1(void) {
     }
 }
 
+void test_slist_set_value_1(void) {
+
+    {
+        char edata[ slist_size(sizeof(char*)) ];
+        slist *e = (slist*)edata;
+
+        slist_set_value(char*,e,"FUBAR");
+        fprintf(stdout, "s1: %s\n", *slist_value(char**,e));
+    }
+
+    {
+        char edata[ slist_size(sizeof(int)) ];
+        slist *e = (slist*)edata;
+
+        slist_set_value(int,e,0xDEADBEEF);
+        fprintf(stdout, "s2: %x\n", *slist_value(int*,e));
+    }
+}
+
+void test_slist_reverse_1(void) {
+
+    char pool[256 * slist_size(sizeof(char))];
+    slist *free = slist_pool(pool, slist_size(sizeof(char)), sizeof(pool));
+
+    char c;
+    slist *ls = slist_nil();
+    for( c = 'A'; c <= 'Z'; c++) {
+        ls = slist_cons(slist_alloc(&free, &c, init_char), ls);
+    }
+
+    slist *p = slist_nil();
+    for(p = ls; p; p = p->next ) {
+        fprintf(stdout, "%c ", *slist_value(char*,p));
+    }
+
+    fprintf(stdout, "\n");
+    slist_reverse(&ls);
+
+    for(p = ls; p; p = p->next ) {
+        fprintf(stdout, "%c ", *slist_value(char*,p));
+    }
+    fprintf(stdout, "\n");
+
+    slist *nil = 0;
+    slist_reverse(&nil);
+    size_t l = slist_length(nil);
+    fprintf(stdout, "nil len: %zu\n", l);
+
+    char ldata[slist_size(sizeof(int))] = { 0 };
+    slist *single = ldata;
+    slist_set_value(int,single,1);
+    slist_reverse(&single);
+
+    for(p = single; p; p = p->next ) {
+        fprintf(stdout, "%d\n", *slist_value(int*,p));
+    }
+
+}
+
 

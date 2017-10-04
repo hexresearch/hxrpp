@@ -1,0 +1,17 @@
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 8
+  head: nil
+  tail: nil
+  free: xxxx
+
+00 01 02 03 04 05 06 07 08 09
+04 01 02 03 04 05 06 07 08 09
+mfifo_dump_status
+  chunk_size: 4
+  free_chunks_max: 16
+  free_chunks_num: 0
+  head: xxxx
+  tail: xxxx
+  free: nil

@@ -15,6 +15,8 @@ typedef struct slist_ {
 
 #define slist_value(t, it) ((t)((it)->value))
 
+#define slist_set_value(t,l,v) (*(t*)((l)->value)) = v
+
 slist *slist_cons(slist *item, slist *next);
 
 slist *slist_uncons(slist **pitem);
@@ -34,6 +36,7 @@ size_t slist_length(slist *head);
 
 void slist_foreach(slist*, void *cc, void (*)(void*, void*));
 
+void slist_reverse(slist **r);
 
 // keeps order
 void slist_filt_destructive( slist **xs
