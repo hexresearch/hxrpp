@@ -19,13 +19,15 @@ UTILS_SOURCES+=app_config.c
 $(eval $(call miscdata_sources, $(MISCDATA_SOURCES)))
 $(eval $(call add_source_dir, $(TOP)/contrib/hexsockaddr, hexsockaddr.c))
 
-HEXBWCLIENT_SOURCES+=hxrpp_server.c
+HXRPP_LIB_SOURCES := hxrpp.c
 
-HEXBWCLIENT_SOURCES+= $(HEXBWCLIENT_LIB_SOURCES)
+HXRPP_SOURCES+=hxrpp_server.c
+
+HXRPP_SOURCES+= $(HXRPP_LIB_SOURCES)
 
 $(eval $(call utils_sources, $(UTILS_SOURCES)))
 
-$(eval $(call ExecFile,hxrpp_server,$(HEXBWCLIENT_SOURCES) $(ALLSOURCES)))
+$(eval $(call ExecFile,hxrpp_server,$(HXRPP_SOURCES) $(ALLSOURCES)))
 
 $(OPTS_GEN):
 	@echo Generate $@
