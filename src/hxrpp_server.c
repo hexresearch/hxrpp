@@ -84,14 +84,6 @@ static bool create_app_socket( struct hxrpp_server_cfg *app
 
     int opt = 1;
 
-    if( setsockopt( *sock
-                  , SOL_SOCKET
-                  , SO_REUSEADDR
-                  , &opt, sizeof(opt)) != 0 ) {
-       perror("sock: reuse");
-       exit(-1);
-    }
-
     if( fcntl(*sock, F_SETFL, O_NONBLOCK, 1) == -1 ) {
        perror("sock: nonblock");
        exit(-1);
@@ -100,21 +92,10 @@ static bool create_app_socket( struct hxrpp_server_cfg *app
     return true;
 }
 
-int main(int argc, char **argv)
-{
-    // TODO: init with command line args
-    char conf_mem[APP_CONFIG_SIZE];
-
-    struct hxrpp_server_cfg *app = init_app_config(conf_mem, sizeof(conf_mem));
-
-    if( !app_config_load(app->cfg, argc, argv) ) {
-        exit(-1);
-    }
-
-    // TODO: setup signals
+void wait_client_and_send( struct hxrpp_server_cfg *app ) {
+    fprintf(stderr, "wait_client_and_send\n");
 
     // TODO: create socket
-
     hexsockaddr_t sa;
     int sock = -1;
     if( !create_app_socket(app, &sa, &sock) ) {
@@ -138,58 +119,198 @@ int main(int argc, char **argv)
     // FIXME: remove log message
     fprintf(stdout, "polling...\n");
 
-    for( ;;) {
-        int ret = poll(fds, sizeof(fds)/sizeof(fds[0]), -1);
+    int ret = poll(fds, sizeof(fds)/sizeof(fds[0]), -1);
 
-        // TODO: when got UDP message
+    // TODO: when got UDP message
 
-        char data[256] = { 0 };
-        hexsockaddr_t orig = { 0 };
+    char data[256] = { 0 };
+    hexsockaddr_t orig = { 0 };
 
-        socklen_t orig_size = sizeof(hexsockaddr_t);
+    socklen_t orig_size = sizeof(hexsockaddr_t);
 
-        hxrpp_session_init_msg_t hxrmsg = { 0 };
+    hxrpp_session_init_msg_t hxrmsg = { 0 };
 
-        struct sockaddr saa = { 0 };
+    int len = recvfrom( fds[ret].fd
+                      , hxrmsg.raw
+                      , sizeof(hxrmsg.raw)
+                      , MSG_DONTWAIT
+                      , (struct sockaddr*)&orig
+                      , &orig_size );
 
-        int len = recvfrom( fds[ret].fd
-                          , hxrmsg.raw
-                          , sizeof(hxrmsg.raw)
-                          , MSG_DONTWAIT
-                          , (struct sockaddr*)&orig
-                          , &orig_size );
-        data[len] = 0;
+    char tmp[256];
+    fprintf(stdout, "got message %d %d %d %d %d %s\n"
+                  , ret
+                  , sock
+                  , fds[ret].fd
+                  , orig_size
+                  , len
+                  , hexsockaddr_fmt(tmp, sizeof(tmp), true, &orig)
+                  );
 
-        char tmp[256];
-        fprintf(stdout, "got message %d %d %d %d %d %s\n"
-                      , ret
-                      , sock
-                      , fds[ret].fd
-                      , orig_size
-                      , len
-                      , hexsockaddr_fmt(tmp, sizeof(tmp), true, &orig)
-                      );
+    // TODO:   read UDP message
 
-        // TODO:   read UDP message
+    // TODO:   start packet pairs generation with
+    //         given length and given delay
+    //         during the given time
 
-        // TODO:   start packet pairs generation with
-        //         given length and given delay
-        //         during the given time
+    const int packet_size = 1024;
+    hxrpp_usec_t pair_gap = { .u = 100000 };
+    hxrpp_usec_t period   = { .u = 5 * 1000000 };
 
-        const int packet_size = 1024;
-        hxrpp_usec_t pair_gap = { .u = 100000 };
-        hxrpp_usec_t period   = { .u = 5 * 1000000 };
+    hxrpp_send_pkt_pairs( fds[ret].fd
+                        , &orig
+                        , packet_size
+                        , &pair_gap
+                        , &period
+                        , 0
+                        , 0 );
+    close(sock);
+}
 
-        hxrpp_send_pkt_pairs( fds[ret].fd
-                            , &orig
-                            , packet_size
-                            , &pair_gap
-                            , &period
-                            , 0
-                            , 0 );
+void receive_packets_from_remote( struct hxrpp_server_cfg *app, hexsockaddr_t *remote) {
+    char tmp[256];
+    fprintf(stderr, "receive_packets_from_remote %s\n", hexsockaddr_fmt(tmp, sizeof(tmp), true, remote));
+
+    hexsockaddr_t sa;
+
+    int sock = -1;
+    if( !create_app_socket(app, &sa, &sock) ) {
+        fprintf(stderr, "can't create socket\n");
+        exit(-1);
+    }
+
+    socklen_t ssize = hexsockaddr_ipv4(remote) ? sizeof(struct sockaddr_in)
+                                               : sizeof(struct sockaddr_in6);
+
+    if(connect(sock, (struct sockaddr*)remote, ssize ) < 0 ) {
+       char tmp[256];
+       fprintf(stderr, "cant' connect to %d %s\n"
+                     , sock
+                     , hexsockaddr_fmt(tmp, sizeof(tmp), true, remote));
+        exit(-1);
+    }
+
+    hxrpp_session_init_msg_t init = { 0 };
+
+    struct timespec timeout;
+    timeout.tv_sec  = 5;
+    timeout.tv_nsec = 0;
+
+    struct iovec iov[1];
+    iov[0].iov_base = &init;
+    iov[0].iov_len  = sizeof(init);
+
+    struct msghdr hdr;
+    memset(&hdr, 0, sizeof(hdr));
+    hdr.msg_name    = remote;
+    hdr.msg_namelen = ssize;
+    hdr.msg_iov     = iov;
+    hdr.msg_iovlen  = 1;
+
+    sendmsg(sock, &hdr, 0);
+
+
+    // TODO: listen/poll UDP socket
+    struct pollfd fds[2];
+    memset(fds, 0, sizeof(fds));
+    fds[1].fd = sock;
+    fds[1].events = POLLIN;
+
+
+    for(;;) {
+
+        const int train = 2;
+        const int BUFSIZE = 1024;
+
+        struct mmsghdr msgs[train];
+        struct iovec iovecs[train];
+        char bufs[train][BUFSIZE];
+
+        memset(msgs, 0, sizeof(msgs));
+
+        for(int i = 0; i < train; i++) {
+            iovecs[i].iov_base         = bufs[i];
+            iovecs[i].iov_len          = BUFSIZE;
+            msgs[i].msg_hdr.msg_iov    = &iovecs[i];
+            msgs[i].msg_hdr.msg_iovlen = 1;
+        }
+
+        int ret = poll(fds, sizeof(fds)/sizeof(fds[0]), 10000);
+
+        int retval = recvmmsg(sock, msgs, train, 0, &timeout);
+
+        if( !retval ) {
+            break;
+        }
+
+        if(retval == -1) {
+            fprintf(stderr, "recvmmsg() screwed\n\n");
+            exit(-1);
+        }
+
+        fprintf(stderr, "retval %d\n", retval);
+
+    }
+/*    }*/
+
+/*    usleep( 10*1000000 );*/
+
+    close(sock);
+}
+
+int main(int argc, char **argv)
+{
+    // TODO: init with command line args
+    char conf_mem[APP_CONFIG_SIZE];
+
+    struct hxrpp_server_cfg *app = init_app_config(conf_mem, sizeof(conf_mem));
+
+    if( !app_config_load(app->cfg, argc, argv) ) {
+        exit(-1);
+    }
+
+    long serv_port = 0;
+    app_config_opt_get_int(app->cfg, SERVE_ON_PORT, &serv_port);
+
+    fprintf(stderr, "serve %s %d\n", serv_port > 1 ? "yes" : "no", (int)serv_port );
+
+    bool send = false;
+    app_config_opt_get_bool(app->cfg, SEND_PACKETS, &send);
+
+    if( serv_port > 0 && send ) {
+        wait_client_and_send(app);
+    }
+
+    char *remote_str = 0;
+    app_config_opt_get_str(app->cfg, REMOTE, &remote_str);
+    hexsockaddr_t *sa = 0, sa_mem;
+
+    if( remote_str ) {
+
+        sa = hexsockaddr_parse(&sa_mem, true, remote_str) ? &sa_mem : 0;
+
+        if( remote_str && !sa ) {
+            fprintf(stderr, "bad remote addr: %s\n", remote_str);
+            exit(-1);
+        }
 
     }
 
+    bool receive = false;
+    app_config_opt_get_bool(app->cfg, RECEIVE, &receive);
+
+    if( receive && sa ) {
+        receive_packets_from_remote(app, sa);
+    }
+
+    fprintf(stderr, "no idea\n");
+    exit(-1);
+
+    // TODO: setup signals
+
+    for( ;;) {
+
+    }
 
     return 0;
 }

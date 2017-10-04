@@ -510,6 +510,7 @@ bool app_config_opt_get_int( struct app_config *cfg
                              , long *r) {
 
     struct app_opt_val *d = hash_get(cfg->opt_hash, (void*)k);
+
     if( d ) {
         *r = d->u.v_int;
         return true;

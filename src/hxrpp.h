@@ -16,12 +16,12 @@ typedef union hxrpp_session_init_msg {
 } hxrpp_session_init_msg_t;
 
 
-bool hxrpp_send_pkt_pairs( int socket
-                         , hexsockaddr_t *dst
-                         , int size
-                         , hxrpp_usec_t *gap
-                         , hxrpp_usec_t *due
-                         , void *pkt_init_cc
-                         , void (*pkt_data_init)(void *, int size, char *pkt ) );
+size_t hxrpp_send_pkt_pairs( int socket
+                           , hexsockaddr_t *dst
+                           , int size
+                           , hxrpp_usec_t *gap
+                           , hxrpp_usec_t *due
+                           , void *pkt_init_cc
+                           , void (*pkt_data_init)(void *, int size, char *pkt ) );
 
 #endif
