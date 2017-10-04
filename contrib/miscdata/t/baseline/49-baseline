@@ -1,0 +1,10 @@
+adding QQQ: cmp:0 cpy:2
+adding LALA: cmp:1 cpy:2
+
+(0,zero)
+(LALA,fa)
+(QQQ,bebebe)
+
+removing QQQ: cmp:3 cpy:0
+(0,zero)
+(LALA,fa)

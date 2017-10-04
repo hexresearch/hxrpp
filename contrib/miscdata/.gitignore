@@ -1,0 +1,7 @@
+tags
+test-suite
+test-suite.h
+dradix-test
+hash-test
+slist-test
+*.swp

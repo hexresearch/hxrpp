@@ -1,0 +1,224 @@
+capacity:         1024
+used:             631
+collisions (avg): 0
+max. row:         7
+
+filtered
+
+capacity:         128
+used:             75
+collisions (avg): 0
+max. row:         5
+
+(UHCAS,5)
+(2WVAJOGS,8)
+(HX,2)
+(PAM68,5)
+(HB,2)
+(PA6,3)
+(CM56D,5)
+(OVB6PV16,8)
+(0I7T,4)
+(58R8E4P,7)
+(7WO2P,5)
+(G7,2)
+(JKB,3)
+(T7A,3)
+(12XGE,5)
+(7DK4,4)
+(JH8EVBJ,7)
+(7NXARI,6)
+(DU7,3)
+(FS62L,5)
+(XN7LVR2Y,8)
+(D1,2)
+(MSEDNUF,7)
+(CM,2)
+(2IEAJ,5)
+(UGNLE7U,7)
+(KUHI,4)
+(7XJKA27,7)
+(TEEDUC,6)
+(B6,2)
+(YMCNN2,6)
+(YRB6M7,6)
+(3T8,3)
+(N0WVFML,7)
+(FLB,3)
+(XXF7FCI4,8)
+(K3ARGUGS,8)
+(4YAW,4)
+(P6U,3)
+(A56,3)
+(VV8EGK,6)
+(SSRT5M,6)
+(6IF,3)
+(3DTYD3Y2,8)
+(B0J,3)
+(3MI,3)
+(P3F,3)
+(IVMD8,5)
+(YO,2)
+(RPTF,4)
+(X,1)
+(U5ODK0,6)
+(X,1)
+(X,1)
+(67JSK,5)
+(S,1)
+(J,1)
+(2C0E,4)
+(G,1)
+(F,1)
+(8,1)
+(0,1)
+(YTUJ,4)
+(WM,2)
+(KVYOAN,6)
+(F2SH,4)
+(MTT,3)
+(1ETHN04,7)
+(7RN38,5)
+(BJR,3)
+(GEPAON,6)
+(2JM,3)
+(BW2X,4)
+(MHE14KS,7)
+(IL8P2L,6)
+(WSE4A2,6)
+(IMM8X,5)
+(PKV,3)
+(5BH,3)
+(FRYIWBF,7)
+(3XSC7,5)
+(3C,2)
+(OBRK,4)
+(6IHYJ,5)
+(30EWD,5)
+(0DKX,4)
+(H260E1,6)
+(DGHV,4)
+(THD1B4,6)
+(T6AFN,5)
+(CGJJ,4)
+(0N6J,4)
+(5113OD,6)
+(JSOAEA,6)
+(6652,4)
+(YGJKO,5)
+(NO,2)
+(OSUVMG,6)
+(PL6B,4)
+(WU11U57,7)
+(CIJ87KP,7)
+(GS130CA,7)
+(JR,2)
+(G5P,3)
+(XDJSH,5)
+(43EC1,5)
+     P6U: 3 OK
+    RPTF: 4 OK
+     BJR: 3 OK
+   43EC1: 5 OK
+  OSUVMG: 6 OK
+   XDJSH: 5 OK
+   7RN38: 5 OK
+   30EWD: 5 OK
+ 1ETHN04: 7 OK
+    4YAW: 4 OK
+   12XGE: 5 OK
+K3ARGUGS: 8 OK
+      YO: 2 OK
+   IVMD8: 5 OK
+     P3F: 3 OK
+     3MI: 3 OK
+   6IHYJ: 5 OK
+     T7A: 3 OK
+     G5P: 3 OK
+ 7XJKA27: 7 OK
+    OBRK: 4 OK
+    KUHI: 4 OK
+XXF7FCI4: 8 OK
+     MTT: 3 OK
+      3C: 2 OK
+     JKB: 3 OK
+   3XSC7: 5 OK
+ FRYIWBF: 7 OK
+     B0J: 3 OK
+      JR: 2 OK
+      NO: 2 OK
+      G7: 2 OK
+   7WO2P: 5 OK
+     5BH: 3 OK
+ 58R8E4P: 7 OK
+    0I7T: 4 OK
+   YGJKO: 5 OK
+3DTYD3Y2: 8 OK
+ UGNLE7U: 7 OK
+OVB6PV16: 8 OK
+   2IEAJ: 5 OK
+      CM: 2 OK
+     PKV: 3 OK
+ MSEDNUF: 7 OK
+ GS130CA: 7 OK
+    F2SH: 4 OK
+   IMM8X: 5 OK
+    6652: 4 OK
+  JSOAEA: 6 OK
+     FLB: 3 OK
+      D1: 2 OK
+  WSE4A2: 6 OK
+  KVYOAN: 6 OK
+  IL8P2L: 6 OK
+XN7LVR2Y: 8 OK
+ MHE14KS: 7 OK
+  5113OD: 6 OK
+    0N6J: 4 OK
+    CGJJ: 4 OK
+   CM56D: 5 OK
+   T6AFN: 5 OK
+ CIJ87KP: 7 OK
+      WM: 2 OK
+     6IF: 3 OK
+     PA6: 3 OK
+  THD1B4: 6 OK
+      HB: 2 OK
+ N0WVFML: 7 OK
+   PAM68: 5 OK
+    YTUJ: 4 OK
+   FS62L: 5 OK
+  SSRT5M: 6 OK
+ WU11U57: 7 OK
+     DU7: 3 OK
+       0: 1 OK
+    PL6B: 4 OK
+       8: 1 OK
+  7NXARI: 6 OK
+  VV8EGK: 6 OK
+     3T8: 3 OK
+      HX: 2 OK
+    BW2X: 4 OK
+       F: 1 OK
+  YRB6M7: 6 OK
+       G: 1 OK
+     2JM: 3 OK
+    DGHV: 4 OK
+    2C0E: 4 OK
+       J: 1 OK
+     A56: 3 OK
+ JH8EVBJ: 7 OK
+2WVAJOGS: 8 OK
+       S: 1 OK
+   UHCAS: 5 OK
+   67JSK: 5 OK
+  H260E1: 6 OK
+  YMCNN2: 6 OK
+    0DKX: 4 OK
+      B6: 2 OK
+       X: 1 OK
+       X: 1 OK
+  U5ODK0: 6 OK
+       X: 1 OK
+    7DK4: 4 OK
+  TEEDUC: 6 OK
+  GEPAON: 6 OK
