@@ -33,6 +33,8 @@ size_t hxrpp_send_pkt_pairs( int sock
 
     size_t sent = 0;
 
+    srand(time(0));
+
     fprintf(stdout, "hxrpp_send_pkt_pairs \n");
 
     socklen_t ssize = hexsockaddr_ipv4(dst) ? sizeof(struct sockaddr_in)

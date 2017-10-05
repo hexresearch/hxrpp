@@ -100,6 +100,7 @@ static bool create_app_socket( struct hxrpp_server_cfg *app
 void wait_client_and_send( struct hxrpp_server_cfg *app ) {
     fprintf(stderr, "wait_client_and_send\n");
 
+
     // TODO: create socket
     hexsockaddr_t sa;
     int sock = -1;
@@ -296,9 +297,9 @@ int main(int argc, char **argv)
         exit(-1);
     }
 
-    app->max_packets  = 4000;
+    app->max_packets  = 3000;
     app->packet_size  = 1432;
-    app->period.u     = 40000000;
+    app->period.u     = 90000000;
     app->train_gap.u  = app->period.u / (app->max_packets / 2);
 
     // TODO: setup signals
