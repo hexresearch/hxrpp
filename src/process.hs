@@ -24,7 +24,7 @@ main = do
 
   let xx = map (\s -> realToFrac ( (1500*8/s) / 1000 / 1000 ) ) ss' :: [Double]
 
-  let grid = (M.fromList $ zip ([1,2 .. 1000]) (repeat 0)) :: M.Map Int Int
+  let grid = (M.fromList $ zip ([10,20 .. 1000]) (repeat 0)) :: M.Map Int Int
 
   let xxx = catMaybes $ map (\x -> M.lookupGT (ceiling x) grid >>= \(k,_) -> return (k,1 :: Int) ) xx
 
