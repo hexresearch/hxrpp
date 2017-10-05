@@ -26,7 +26,7 @@ main = do
 
   let grid = (M.fromList $ zip ([10,20 .. 1000]) (repeat 0)) :: M.Map Int Int
 
-  let xxx = catMaybes $ map (\x -> M.lookupGT (ceiling x) grid >>= \(k,_) -> return (k,1 :: Int) ) xx
+  let xxx = catMaybes $ map (\x -> M.lookupGT (floor x) grid >>= \(k,_) -> return (k,1 :: Int) ) xx
 
   let rs = M.fromListWith (+) xxx
 
